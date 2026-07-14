@@ -31,6 +31,25 @@
         font-size: 13px;
         box-shadow: 0 2px 6px rgba(87, 184, 26, 0.35);
       }
+      /* Page-specific hero background: bathroom remodel */
+      .hero-bg {
+        background-image: url("assets/img/hero-bathroom-desktop.webp");
+      }
+      @media (max-width: 560px) {
+        .hero-bg {
+          background-image: url("assets/img/hero-bathroom-mobile.webp");
+        }
+      }
+      /* Lighter hero overlay so the bathroom shows through brighter */
+      .hero-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(16, 18, 19, 0.66) 0%,
+          rgba(18, 20, 21, 0.5) 38%,
+          rgba(20, 22, 23, 0.34) 72%,
+          rgba(22, 24, 25, 0.32) 100%
+        );
+      }
     </style>
 <!-- Google reCAPTCHA is lazy-loaded near the form to improve initial page speed -->
 </link></head>
@@ -45,7 +64,7 @@
 <img alt="CD Remodels Logo" width="89" height="50" decoding="async" fetchpriority="high" src="assets/img/logo.webp"/>
 </a>
 <div class="top-cta">
-<span class="top-badge">GET 15% OFF, CALL NOW!</span>
+<span class="top-badge">GET 10% OFF, CALL NOW!</span>
 <a class="top-phone" href="tel:9542189272">CALL <span>(954) 218-9272</span></a>
 </div>
 </div>
@@ -119,8 +138,8 @@
 <div class="feature">
 <img alt="5 Star Rated" decoding="async" src="assets/img/icons/28-years-experience.svg"/>
 <div class="feature-text">
-<strong>5 Star</strong>
-<span>Rated</span>
+<strong>5 Star Rated</strong>
+<span>on Google</span>
 </div>
 </div>
 <div class="feature">
@@ -153,10 +172,9 @@
 <!-- LEFT: copy + features + CTA -->
 <div class="problem-content">
 <h2 class="section-title">
-<span class="title-dark">The CD Remodels</span><br/>
-<span class="title-bright">Solution</span>
+<span class="title-dark">Dreaming of a</span><br/>
+<span class="title-bright">New Bathroom?</span>
 </h2>
-<p class="section-eyebrow">Older or failing pipes can lead to:</p>
 <h3 class="solution-title">
 <span class="title-dark">The</span>
 <span class="title-bright">CD Remodels</span>
@@ -167,11 +185,8 @@
           </p>
 <div class="feature-cards">
 <div class="feature-card">
-<img alt="Icon 1" decoding="async" loading="lazy" src="assets/img/icons/icon-1.svg"/>
-<p>
-<strong>Whole Bathroom Remodeling </strong><br>
-<!--<span>(homes, condos, townhomes)</span>-->
-</p>
+<img alt="Icon 1" decoding="async" loading="lazy" src="assets/img/icons/icon-1.svg"/><br>
+<strong>Full Bathroom Remodel</strong>
 </div>
 <div class="feature-card">
 <img alt="Icon 2" decoding="async" loading="lazy" src="assets/img/icons/icon-2.svg"/><br>
@@ -189,97 +204,61 @@
 <!-- RIGHT: 2x2 staggered image grid -->
 <div class="problem-images">
 <div class="problem-img-card">
-<img alt="Low water pressure faucet" decoding="async" loading="lazy" src="assets/img/gallery/bathroom1.webp"/>
-<span class="problem-label label-teal">Low Water Pressure</span>
+<img alt="Subway tile shower with marble hex floor" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img1.webp"/>
+<span class="problem-label label-teal">Tile, Flooring &amp; Fixtures</span>
 </div>
 <div class="problem-img-card">
-<img alt="Leaking pipe" decoding="async" loading="lazy" src="assets/img/gallery/bathroom2.webp"/>
-<span class="problem-label label-blue">Recurring Leaks</span>
+<img alt="Double vanity with LED-lit mirrors" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img2.webp"/>
+<span class="problem-label label-blue">Lighting &amp; Layouts</span>
 </div>
 <div class="problem-img-card">
-<img alt="Rusty pipes" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img5.jpg"/>
-<span class="problem-label label-blue">Rusty or Discolored Water</span>
+<img alt="Bathroom vanity with round mirrors" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img4.jpg"/>
+<span class="problem-label label-blue">Vanity &amp; Storage</span>
 </div>
 <div class="problem-img-card">
-<img alt="Plumber repairing pipes" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img4.jpg"/>
-<span class="problem-label label-teal">Costly Ongoing Repairs</span>
+<img alt="Finished marble bathroom with walk-in shower" decoding="async" loading="lazy" src="assets/img/gallery/gallery-bathroom-marble.webp"/>
+<span class="problem-label label-teal">Shower &amp; Tub Upgrades</span>
 </div>
 </div>
 </div>
 </section>
 
-<!-- Work Gallery -->
-<section class="gallery-list-wrapper">
-	<div class="container">
-        <div class="top-mid-title">
-            <!-- <div class="toplabel">Our Recent Work</div> -->
-            <h2 class="process-title">
-<span class="title-bright">Our Gallery</span>
+<!--PROJECT GALLERY CAROUSEL -->
+<section class="gallery" id="gallery">
+<div class="container">
+<p class="gallery-eyebrow">Our Recent Work</p>
+<h2 class="gallery-title">
+<span class="title-dark">Browse Our</span>
+<span class="title-bright">Bathroom Gallery</span>
 </h2>
-        </div>
-		<div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 mtb15">
-                <div class="gallery-images">
-                    <a data-fancybox="gallery" data-src="assets/img/gallery/bathroom-img1.webp">
-                        <img src="assets/img/gallery/bathroom-img1.webp" alt="Gallery 1">
-                        <div class="hover-content">
-                            <span class="hover-icon"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mtb15">
-                <div class="gallery-images">
-                    <a data-fancybox="gallery" data-src="assets/img/gallery/bathroom-img2.webp">
-                        <img src="assets/img/gallery/bathroom-img2.webp" alt="Gallery 2">
-                        <div class="hover-content">
-                            <span class="hover-icon"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mtb15">
-                <div class="gallery-images">
-                    <a data-fancybox="gallery" data-src="assets/img/gallery/bathroom-img3.jpg">
-                        <img src="assets/img/gallery/bathroom-img3.jpg" alt="Gallery 3">
-                        <div class="hover-content">
-                            <span class="hover-icon"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mtb15">
-                <div class="gallery-images">
-                    <a data-fancybox="gallery" data-src="assets/img/gallery/bathroom-img4.jpg">
-                        <img src="assets/img/gallery/bathroom-img4.jpg" alt="Gallery 4">
-                        <div class="hover-content">
-                            <span class="hover-icon"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mtb15">
-                <div class="gallery-images">
-                    <a data-fancybox="gallery" data-src="assets/img/gallery/bathroom-img6.webp">
-                        <img src="assets/img/gallery/bathroom-img6.webp" alt="Gallery 5">
-                        <div class="hover-content">
-                            <span class="hover-icon"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mtb15">
-                <div class="gallery-images">
-                    <a data-fancybox="gallery" data-src="assets/img/gallery/bathroom-img5.jpg">
-                        <img src="assets/img/gallery/bathroom-img5.jpg" alt="Gallery 6">
-                        <div class="hover-content">
-                            <span class="hover-icon"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="gallery-carousel">
+<button class="gallery-arrow gallery-prev" type="button" aria-label="Previous project">
+<svg aria-hidden="true" height="26" viewbox="0 0 24 24" width="26"><path d="M15 4l-8 8 8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path></svg>
+</button>
+<div class="gallery-viewport">
+<figure class="gallery-slide">
+<img alt="Bathroom remodel with tiled shower and modern vanity" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img1.webp"/>
+<figcaption class="gallery-caption">Tiled Shower Remodel</figcaption>
+</figure>
+<figure class="gallery-slide">
+<img alt="Bathroom remodel with double vanity and glass shower" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img2.webp"/>
+<figcaption class="gallery-caption">Double Vanity</figcaption>
+</figure>
+<figure class="gallery-slide">
+<img alt="Modern bathroom remodel with new fixtures" decoding="async" loading="lazy" src="assets/img/gallery/bathroom-img4.jpg"/>
+<figcaption class="gallery-caption">Modern Bath</figcaption>
+</figure>
+<figure class="gallery-slide">
+<img alt="Finished marble bathroom with walk-in shower" decoding="async" loading="lazy" src="assets/img/gallery/gallery-bathroom-marble.webp"/>
+<figcaption class="gallery-caption">Marble Bath Remodel</figcaption>
+</figure>
+</div>
+<button class="gallery-arrow gallery-next" type="button" aria-label="Next project">
+<svg aria-hidden="true" height="26" viewbox="0 0 24 24" width="26"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="gallery-dots" aria-label="Select a project"></div>
+</div>
 </section>
 
 <!--SPECIALISTS SECTION-->
@@ -291,18 +270,18 @@
 <img alt="RepipesOnly specialist working on pipes" decoding="async" loading="lazy" src="assets/img/mid-sec-image1.webp"/>
 <!-- Top-right floating callout -->
 <div class="callout callout-top">
-<span class="callout-pill">Long-Term Results</span>
+<span class="callout-pill">Spa-Like Finishes</span>
 <div class="callout-body">
-<p>Better pressure. Cleaner water. Fewer problems.</p>
-<img alt="Icon 7" decoding="async" loading="lazy" src="assets/img/icons/icon-7.svg"/>
+<p>Marble, glass, custom tile work.</p>
+<img alt="Spa-like finishes" decoding="async" loading="lazy" src="assets/img/icons/icon-sparkle.svg"/>
 </div>
 </div>
 <!-- Bottom-left floating callout -->
 <div class="callout callout-bottom">
-<span class="callout-pill">Whole-Home Repipe</span>
+<span class="callout-pill">Full Bathroom Remodel</span>
 <div class="callout-body">
-<p>Replace the cause —<br/>not just the symptom</p>
-<img alt="Icon 8" decoding="async" loading="lazy" src="assets/img/icons/icon-8.svg"/>
+<p>Floor to ceiling,<br/>one team.</p>
+<img alt="Full bathroom remodel" decoding="async" loading="lazy" src="assets/img/icons/icon-bathtub.svg"/>
 </div>
 </div>
 </div>
@@ -352,7 +331,7 @@ always </strong>
 
 </ul>
 <a class="problem-cta" href="tel:9542189272">
-            CALL FOR 15% OFF  <span>954-218-9272</span>
+            CALL FOR 10% OFF  <span>954-218-9272</span>
 </a>
 </div>
 </div>
@@ -368,7 +347,7 @@ always </strong>
 <div class="process-steps">
 <div class="process-card">
 <h3>Step 1</h3>
-<img alt="Icon 4" decoding="async" loading="lazy" src="assets/img/icons/icon-4.svg"/>
+<img alt="Free consultation" decoding="async" loading="lazy" src="assets/img/icons/icon-step-1.svg"/>
 <h4>Free Consultation</h4>
 <p>
               We learn your goals, timeline, and budget, then give you honest,
@@ -381,7 +360,7 @@ always </strong>
 </svg>
 <div class="process-card">
 <h3>Step 2</h3>
-<img alt="Icon 5" decoding="async" loading="lazy" src="assets/img/icons/icon-5.svg"/>
+<img alt="Planning and design" decoding="async" loading="lazy" src="assets/img/icons/icon-step-2.svg"/>
 <h4>Planning &amp; Design</h4>
 <p>
               We map out every detail upfront, so there are no surprises once
@@ -394,7 +373,7 @@ always </strong>
 </svg>
 <div class="process-card">
 <h3>Step 3</h3>
-<img alt="Icon 6" decoding="async" loading="lazy" src="assets/img/icons/icon-6.svg"/>
+<img alt="Build and project management" decoding="async" loading="lazy" src="assets/img/icons/icon-step-3.svg"/>
 <h4>Build &amp; Project Management</h4>
 <p>
               Our experienced team manages your remodel start to finish, keeping
@@ -407,7 +386,7 @@ always </strong>
 </svg>
 <div class="process-card">
 <h3>Step 4</h3>
-<img alt="Icon 4" decoding="async" loading="lazy" src="assets/img/icons/icon-4.svg"/>
+<img alt="Final walkthrough" decoding="async" loading="lazy" src="assets/img/icons/icon-step-4.svg"/>
 <h4>Final Walkthrough</h4>
 <p>
               We inspect every detail against our standards — and yours — before

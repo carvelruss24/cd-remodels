@@ -88,3 +88,110 @@
     });
   });
 })();
+
+/* =========================================
+   Project Gallery: coverflow carousel
+   Center slide is large + clear; neighbours peek at the
+   sides, scaled and dimmed. Arrows, dots, keyboard,
+   touch-swipe and (motion-safe) autoplay all drive the
+   same active index.
+   ========================================= */
+(function () {
+  var root = document.querySelector('.gallery-carousel');
+  if (!root) return;
+  var slides = Array.prototype.slice.call(root.querySelectorAll('.gallery-slide'));
+  if (!slides.length) return;
+
+  var prevBtn = root.querySelector('.gallery-prev');
+  var nextBtn = root.querySelector('.gallery-next');
+  var dotsWrap = root.parentNode.querySelector('.gallery-dots');
+  var n = slides.length;
+  var active = 0;
+  var timer = null;
+  var AUTOPLAY_MS = 5000;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Build dots
+  var dots = [];
+  if (dotsWrap) {
+    slides.forEach(function (s, i) {
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'gallery-dot';
+      d.setAttribute('aria-label', 'Go to project ' + (i + 1));
+      d.addEventListener('click', function () { go(i); restart(); });
+      dotsWrap.appendChild(d);
+      dots.push(d);
+    });
+  }
+
+  function layout() {
+    slides.forEach(function (s, i) {
+      var rel = i - active;
+      if (rel > n / 2) rel -= n;
+      if (rel < -n / 2) rel += n;
+      var dist = Math.abs(rel);
+      var sign = rel < 0 ? -1 : 1;
+      var scale = dist === 0 ? 1 : (dist === 1 ? 0.8 : 0.62);
+      var opacity = dist === 0 ? 1 : (dist === 1 ? 0.9 : 0);
+      var offset = dist === 0 ? 0 : sign * (56 + (dist - 1) * 42); // % of slide width
+      s.style.transform = 'translate(-50%, -50%) translateX(' + offset + '%) scale(' + scale + ')';
+      s.style.opacity = opacity;
+      s.style.zIndex = String(30 - dist);
+      s.style.pointerEvents = opacity === 0 ? 'none' : 'auto';
+      s.classList.toggle('is-active', dist === 0);
+      s.setAttribute('aria-hidden', dist === 0 ? 'false' : 'true');
+    });
+    dots.forEach(function (d, i) {
+      d.classList.toggle('is-active', i === active);
+      d.setAttribute('aria-current', i === active ? 'true' : 'false');
+    });
+  }
+
+  function go(i) { active = ((i % n) + n) % n; layout(); }
+  function next() { go(active + 1); }
+  function prev() { go(active - 1); }
+
+  if (nextBtn) nextBtn.addEventListener('click', function () { next(); restart(); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { prev(); restart(); });
+
+  // Click a peeking slide to bring it forward
+  slides.forEach(function (s, i) {
+    s.addEventListener('click', function () {
+      if (i !== active) { go(i); restart(); }
+    });
+  });
+
+  // Keyboard (when focus is inside the carousel)
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { prev(); restart(); }
+    else if (e.key === 'ArrowRight') { next(); restart(); }
+  });
+
+  // Touch swipe
+  var startX = null;
+  root.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+    stop();
+  }, { passive: true });
+  root.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) { if (dx < 0) { next(); } else { prev(); } }
+    startX = null;
+    start();
+  }, { passive: true });
+
+  // Autoplay (paused on hover / focus, disabled for reduced motion)
+  function start() { if (!reduceMotion && !timer) timer = window.setInterval(next, AUTOPLAY_MS); }
+  function stop() { if (timer) { window.clearInterval(timer); timer = null; } }
+  function restart() { stop(); start(); }
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', start);
+
+  layout();
+  start();
+  window.addEventListener('resize', layout);
+})();
