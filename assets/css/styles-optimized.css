@@ -1,0 +1,2427 @@
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/barlow-condensed-v13-latin-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/barlow-condensed-v13-latin-800.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../fonts/barlow-condensed-v13-latin-900.woff2') format('woff2');
+}
+
+/* =========================================
+   RepipesOnly.com — Hero Section Styles
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy-darkest: #26282a;
+  --navy-dark: #31353a;
+  --navy: #3e4348;
+  --strip-teal-1: #3b3e42;
+  --strip-teal-2: #2b2e31;
+  --green: #57b81a;
+  --green-mid: #47990f;
+  --green-dark: #3c8109;
+  --green-glow: rgba(87, 184, 26, 0.4);
+  --icon-blue-1: #f6a03e;
+  --icon-blue-2: #f0902a;
+  --logo-blue-1: #f6b45a;
+  --logo-blue-2: #e4670a;
+  --logo-blue-3: #e4670a;
+  --white: #ffffff;
+  --form-grey: #d8d8d8;
+  --form-grey-2: #cfcfcf;
+  --text-muted: #6b6b6b;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family:
+    "Open Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  color: #fff;
+  background: var(--navy-darkest);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+/* =========================================
+   HERO BACKGROUND
+   ========================================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Reserves space for the fixed top-bar; JS sets exact value on load/resize */
+  padding-top: 110px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("../img/main-sec-desktop-bg1.webp");
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+/* Lighter overlay so the palm-tree scene shows through */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 18, 19, 0.84) 0%,
+    rgba(18, 20, 21, 0.64) 38%,
+    rgba(20, 22, 23, 0.44) 72%,
+    rgba(22, 24, 25, 0.42) 100%
+  );
+  z-index: 1;
+}
+.hero > *:not(.hero-bg):not(.hero-overlay) {
+  position: relative;
+  z-index: 2;
+}
+/* =========================================
+   TOP BAR (sticky across entire page; transparent → solid on scroll)
+   ========================================= */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 22px 0 14px;
+  background: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+.top-bar.scrolled {
+  background: #ffffff;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+.top-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;}
+.top-bar .logo img {
+  height: 66px;
+  width: auto;
+  display: block;
+  /* Logo shows white while the bar is transparent over the dark hero */
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+/* Once scrolled, the bar turns white and the logo returns to full color */
+.top-bar.scrolled .logo img {
+  filter: none;
+}
+.logo-icon {
+  color: var(--logo-blue-2);
+  font-size: 26px;
+  background: linear-gradient(
+    180deg,
+    var(--logo-blue-1),
+    var(--logo-blue-3)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.logo-icon.flip {
+  transform: scaleX(-1);
+}
+.logo-text {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(
+    180deg,
+    var(--logo-blue-1) 0%,
+    var(--logo-blue-2) 55%,
+    var(--logo-blue-3) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.logo-accent,
+.logo-dot {
+  /* Inherit the same metallic gradient via parent — no separate fill */
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.top-cta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.top-badge {
+  display: inline-block;
+  background: linear-gradient(180deg, #e06d0c 0%, #c14e07 100%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 5px 22px;
+  border-radius: 999px;
+  letter-spacing: 1.2px;
+  box-shadow: 0 4px 12px rgba(228, 103, 10, 0.35);
+  font-style: italic;
+}
+.top-phone {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.top-phone span {
+  color: var(--green);
+}
+
+/* On the white scrolled bar, darken the phone text for legibility */
+.top-bar.scrolled .top-phone {
+  color: #2e3033;
+  text-shadow: none;
+}
+.top-bar.scrolled .top-phone span {
+  color: #3c8109;
+}
+
+/* =========================================
+   HERO GRID
+   ========================================= */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 70px;
+  padding-top: 30px;
+  padding-bottom: 70px;
+  align-items: center;
+  flex: 1;
+}
+
+/* Grid items default to min-width: auto (= min-content size), which lets
+   rigid children like the 304px reCAPTCHA iframe push the column wider
+   than the viewport. min-width: 0 lets the column shrink properly. */
+.hero-grid > * {
+  min-width: 0;
+}
+
+/* ----- Hero width + spread overrides -----
+   (1) Widen ONLY the hero's main content grid past the global 1480px
+       container width so there's room to spread out on big screens.
+       Top-bar nav is intentionally excluded so it keeps its original width.
+   (2) On wide screens, push the title block flush left and the form
+       block flush right with all leftover space between them. */
+.hero > .container.hero-grid {
+  max-width: 1720px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media (min-width: 1280px) {
+  .hero-grid {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    gap: 60px;
+  }
+}
+
+/* LEFT COLUMN */
+.pill {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  padding: 7px 26px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(2px);
+  font-style: italic;
+}
+
+.hero-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 86px;
+  line-height: 0.95;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 520px;
+  margin-bottom: 36px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.phone-cta {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, #63c31d 0%, #47990f 100%);
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 60px;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 12px 28px var(--green-glow);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.foot-btn .phone-cta{
+    background: #e4670a !important;
+}
+
+.phone-cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 16px 32px rgba(87, 184, 26, 0.55);
+}
+
+.phone-cta-top {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  opacity: 0.95;
+}
+
+.phone-cta-num {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+/* =========================================
+   QUOTE FORM CARD
+   ========================================= */
+.quote-card {
+  background: #fff;
+  color: #1a1a1a;
+  border-radius: 10px;
+  padding: 28px 32px 24px;
+  border: 2px solid var(--green);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 25px 60px rgba(0, 0, 0, 0.4);
+  max-width: 460px;
+  width: 100%;
+  margin-left: auto;
+}
+
+.quote-eyebrow {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.quote-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+/* Hand-drawn underline below title */
+.quote-title-underline {
+  display: block;
+  width: 300px;
+  height: auto;
+  margin: 6px auto 18px;
+}
+
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.quote-form input,
+.quote-form textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: none;
+  border-radius: 4px;
+  background: var(--form-grey);
+  color: #333;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: background 0.15s ease;
+}
+
+.quote-form input:focus,
+.quote-form textarea:focus {
+  background: var(--form-grey-2);
+}
+
+.quote-form input::placeholder,
+.quote-form textarea::placeholder {
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+.quote-form textarea {
+  resize: vertical;
+  min-height: 90px;
+  font-family: inherit;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 10px;
+  color: #555;
+  line-height: 1.45;
+  margin: 8px 0 4px;
+}
+
+.consent input {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--green);
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(180deg, #63c31d 0%, #57b81a 100%);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+  margin-top: 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.submit-btn:hover {
+  background: linear-gradient(180deg, #57b81a 0%, #47990f 100%);
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   CTA SHINE-SWEEP HOVER ANIMATION
+   A diagonal light stripe sweeps across the button on hover.
+   Applied to all primary CTAs.
+   ========================================= */
+.phone-cta,
+.problem-cta,
+.submit-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.phone-cta::before,
+.problem-cta::before,
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.phone-cta:hover::before,
+.problem-cta:hover::before,
+.submit-btn:hover::before {
+  left: 125%;
+}
+
+/* Make sure the button text/content stays above the shine layer */
+.phone-cta > *,
+.problem-cta > *,
+.submit-btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .phone-cta::before,
+  .problem-cta::before,
+  .submit-btn::before {
+    transition: none;
+  }
+}
+
+.terms {
+  font-size: 10px;
+  color: #888;
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* =========================================
+   FEATURES STRIP (teal — not navy)
+   ========================================= */
+.features-strip {
+  background: linear-gradient(
+    180deg,
+    var(--strip-teal-1) 0%,
+    var(--strip-teal-2) 100%
+  );
+  padding: 16px 0;
+  margin-top: auto;
+  position: relative;
+  z-index: 3;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.feature img {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(
+    180deg,
+    var(--icon-blue-1) 0%,
+    var(--icon-blue-2) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 19px;
+  flex-shrink: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.feature-text strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.feature-text span {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 64px;
+  }
+  .hero-grid {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 30px;
+  }
+
+  .top-bar-inner {
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+  }
+
+  .top-cta {
+    align-items: center;
+  }
+
+  .quote-card {
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  /* Center hero content when single-column on mobile/tablet */
+  .hero-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Nav stacks vertically — taller, so reserve more space */
+  .hero {
+    padding-top: 170px;
+  }
+}
+
+/* =========================================
+   DUAL-TITLE TOGGLE (desktop vs mobile line breaks)
+   ========================================= */
+.title-mobile {
+  display: none;
+}
+.title-desktop {
+  display: inline;
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  /* Swap hero background to mobile-optimized version */
+  .hero-bg {
+    background-image: url("../img/main-sec-mobile-bg.webp");
+  }
+
+  /* Hero title: bumped up + show 5-line mobile version
+     (WHOLE-HOME / REPIPING / DONE RIGHT / IN SOUTH / FLORIDA) */
+  .hero-title {
+    font-size: 56px;
+    letter-spacing: 0;
+    margin-bottom: 20px;
+    line-height: 0.95;
+  }
+  .title-desktop {
+    display: none;
+  }
+  .title-mobile {
+    display: inline;
+  }
+
+  /* Top bar phone: more prominent on mobile.
+     Color stays the brand green from the desktop rule. */
+  .top-phone {
+    font-size: 34px;
+    letter-spacing: 0;
+  }
+
+  .phone-cta-num {
+    font-size: 34px;
+  }
+  .phone-cta {
+    padding: 14px 32px;
+    width: 100%;
+    max-width: 360px;
+    border-radius: 14px;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .features-strip {
+    padding: 28px 0;
+  }
+  .feature {
+    gap: 16px;
+  }
+  .feature img {
+    width: 52px;
+    height: 52px;
+  }
+  .quote-card {
+    padding: 24px 22px 22px;
+    max-width: 100%;
+  }
+  .quote-title {
+    font-size: 26px;
+  }
+  .quote-title-underline {
+    width: 240px;
+  }
+
+  /* Top bar: smaller logo + tighter spacing for narrow screens */
+  .top-bar {
+    padding: 18px 0 10px;
+  }
+  .top-bar .logo img {
+    height: 50px;
+  }
+  .top-bar-inner {
+    gap: 10px;
+  }
+  .logo {
+    gap: 8px;
+  }
+  .logo-text {
+    font-size: 26px;
+  }
+  .logo-icon {
+    font-size: 20px;
+  }
+  .top-cta {
+    gap: 8px;
+  }
+  .top-badge {
+    font-size: 10px;
+    padding: 5px 22px;
+    letter-spacing: 1.4px;
+  }
+
+  /* Hero pill + subtitle + grid spacing */
+  .pill {
+    font-size: 10px;
+    padding: 6px 22px;
+    letter-spacing: 1.5px;
+    margin-bottom: 22px;
+  }
+  .hero-sub {
+    font-size: 14.5px;
+    margin-bottom: 26px;
+    max-width: 100%;
+    padding: 0 6px;
+  }
+  .hero-grid {
+    gap: 28px;
+    padding-top: 16px;
+    padding-bottom: 44px;
+  }
+  /* Match the regular container's 20px gutters on small phones so the
+     form aligns with the hero title and green CTA above it. */
+  .hero > .container.hero-grid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  /* Belt-and-suspenders: lock the form card so it can never exceed the
+     visible viewport, regardless of inner content. */
+  .quote-card {
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Extra-narrow phones (≤375px): scale title down so 5 lines still fit */
+@media (max-width: 375px) {
+  .hero-title {
+    font-size: 50px;
+  }
+  .top-phone {
+    font-size: 30px;
+  }
+  .phone-cta-num {
+    font-size: 30px;
+  }
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* =========================================
+   PROBLEM / SOLUTION SECTION
+   ========================================= */
+:root {
+  --title-dark: #2e3033;
+  --title-bright: #e4670a;
+  --headline-blue: #e4670a;
+  --feature-icon-bg: #e6f4d9;
+  --feature-icon-fg: #e4670a;
+  --label-teal-1: #63b83a;
+  --label-teal-2: #3f8a12;
+  --label-blue-1: #f0902a;
+  --label-blue-2: #e4670a;
+}
+
+.problem {
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 80px 0;
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 70px;
+  align-items: start;
+}
+
+/* ---------- LEFT COLUMN ---------- */
+.problem-content {
+  padding-top: 20px;
+}
+
+.section-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin-bottom: 18px;
+}
+
+.title-dark {
+  color: var(--title-dark);
+}
+.title-bright {
+  color: var(--title-bright);
+}
+
+.section-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  font-style: italic;
+  margin-bottom: 32px;
+}
+
+.solution-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.solution-title .title-dark {
+  color: var(--title-dark);
+}
+.solution-title .title-bright {
+  color: var(--title-bright);
+}
+
+.solution-title sup {
+  font-size: 12px;
+  vertical-align: super;
+  margin-left: 1px;
+}
+
+.solution-text {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 28px;
+  max-width: 540px;
+}
+
+
+/* ==========================
+   Gallery Section
+========================== */
+
+.gallery-list-wrapper {
+    padding: 80px 0;
+}
+
+.gallery-list-wrapper .top-mid-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.gallery-list-wrapper .top-mid-title h4 {
+    margin: 0;
+}
+
+/* Equal spacing */
+.gallery-list-wrapper .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.gallery-list-wrapper .col-lg-4,
+.gallery-list-wrapper .col-md-6,
+.gallery-list-wrapper .col-sm-12 {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.gallery-list-wrapper .mtb15 {
+    margin: 0;
+}
+
+/* Gallery Item */
+.gallery-images {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-images img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-images:hover img {
+    transform: scale(1.08);
+}
+
+/* Hover Overlay */
+.gallery-images .hover-content {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display:none;
+}
+
+.gallery-images:hover .hover-content {
+    opacity: 1;
+}
+
+.gallery-images .hover-icon {
+    width: 55px;
+    height: 55px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    position: relative;
+}
+
+.gallery-images .hover-icon::before,
+.gallery-images .hover-icon::after {
+    content: "";
+    position: absolute;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gallery-images .hover-icon::before {
+    width: 18px;
+    height: 2px;
+}
+
+.gallery-images .hover-icon::after {
+    width: 2px;
+    height: 18px;
+}
+
+/* Desktop - 3 Images */
+@media (min-width: 992px) {
+    .gallery-list-wrapper .col-lg-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+/* Tablet - 2 Images */
+@media (max-width: 991px) {
+    .gallery-list-wrapper .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .gallery-images img {
+        height: 280px;
+    }
+}
+
+/* Mobile - 1 Image */
+@media (max-width: 767px) {
+    .gallery-list-wrapper .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .gallery-images img {
+        height: 240px;
+    }
+
+    .gallery-list-wrapper {
+        padding: 60px 0;
+    }
+
+    .gallery-list-wrapper .top-mid-title {
+        margin-bottom: 30px;
+    }
+}
+
+/* ---------- FEATURE CARDS ---------- */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 36px;
+  max-width: 600px;
+}
+
+.feature-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.feature-card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--feature-icon-bg);
+  color: var(--feature-icon-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.feature-card p {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #1a1a1a;
+}
+
+.feature-card p strong {
+  font-weight: 700;
+}
+
+.feature-card p span {
+  color: #888;
+  font-weight: 400;
+}
+
+/* ---------- DARK NAVY CTA ---------- */
+.problem-cta {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #2a2c2e 0%,
+    #3d4145 50%,
+    #303234 100%
+  );
+  color: #fff;
+  text-decoration: none;
+  padding: 17px 38px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 8px 22px rgba(38, 40, 42, 0.3);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.problem-cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 12px 28px rgba(38, 40, 42, 0.4);
+}
+
+.problem-cta span {
+  color: #fff;
+  margin-left: 6px;
+}
+
+/* ---------- IMAGE GRID (staggered) ---------- */
+.problem-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  padding-top: 30px;
+}
+
+/* lift the right column up to create the staggered look */
+.problem-images > :nth-child(2),
+.problem-images > :nth-child(4) {
+  margin-top: -50px;
+}
+
+.problem-img-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.6;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.problem-img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.problem-img-card:hover img {
+  transform: scale(1.05);
+}
+
+.problem-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 11px 16px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  font-style: italic;
+  text-align: center;
+}
+
+.label-teal {
+  background: linear-gradient(
+    180deg,
+    var(--label-teal-1) 0%,
+    var(--label-teal-2) 100%
+  );
+}
+
+.label-blue {
+  background: linear-gradient(
+    180deg,
+    var(--label-blue-1) 0%,
+    var(--label-blue-2) 100%
+  );
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 968px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .section-title {
+    font-size: 38px;
+  }
+  .feature-cards {
+    max-width: none;
+  }
+  .problem-images {
+    padding-top: 0;
+  }
+  .problem-images > :nth-child(2),
+  .problem-images > :nth-child(4) {
+    margin-top: 0;
+  }
+
+  /* Mobile: show the 4 problem images FIRST, then the copy + CTA */
+  .problem-images {
+    order: 1;
+  }
+  .problem-content {
+    order: 2;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .problem {
+    padding: 50px 0;
+  }
+  .feature-cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .section-title {
+    font-size: 30px;
+  }
+  .problem-images {
+    grid-template-columns: 1fr;
+  }
+
+  /* Feature cards: icon + text on the same line on mobile */
+  .feature-card {
+    padding: 18px 18px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .feature-card img {
+    flex-shrink: 0;
+    margin: 0;
+    width: 48px;
+    height: 48px;
+  }
+  .feature-card p {
+    font-size: 14.5px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Icons: rounded-square blue tile with white glyph (matches the mobile target) */
+  .feature-card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(
+      180deg,
+      var(--icon-blue-1) 0%,
+      var(--icon-blue-2) 100%
+    );
+    color: #fff;
+    font-size: 16px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 4px 10px rgba(228, 103, 10, 0.28);
+  }
+
+  /* CTA: full-width pill, stacked "CALL FOR 15% OFF" + phone number */
+  .problem-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    width: 100%;
+    border-radius: 14px;
+    box-sizing: border-box;
+  }
+  .problem-cta span {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1;
+    margin-left: 0;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* =========================================
+   SPECIALISTS SECTION
+   ========================================= */
+.specialists {
+  background: #eef1ee;
+  padding: 90px 0;
+}
+
+.specialists-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ---------- LEFT: VISUAL ---------- */
+.specialists-visual {
+  position: relative;
+  max-width: 460px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.visual-frame {
+  position: relative;
+  border-radius: 26px;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 24px 50px rgba(38, 40, 42, 0.12);
+}
+
+.visual-frame > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+/* ---------- FLOATING CALLOUTS ---------- */
+.callout {
+  position: absolute;
+  width: 240px;
+  z-index: 5;
+}
+
+.callout-pill {
+  display: inline-block;
+  background: linear-gradient(180deg, #e06d0c 0%, #c14e07 100%);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-style: italic;
+  text-transform: uppercase;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 6px 14px rgba(228, 103, 10, 0.35);
+  margin-left: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.callout-body {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px 16px 16px;
+  margin-top: -12px;
+  box-shadow: 0 14px 32px rgba(38, 40, 42, 0.18);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.callout-body p {
+  font-size: 13.5px;
+  color: #1a1a1a;
+  line-height: 1.4;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+}
+
+.callout-icon {
+  color: #e4670a;
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.callout-top {
+  top: 50px;
+  right: -60px;
+}
+
+.callout-bottom {
+  bottom: 90px;
+  left: -60px;
+}
+
+/* ---------- RIGHT: CONTENT ---------- */
+.specialists-content {
+  padding: 10px 0;
+}
+
+.specialists-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  font-style: italic;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+.specialists-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--title-bright);
+  letter-spacing: -0.5px;
+  margin-bottom: 36px;
+}
+
+.specialist-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+}
+
+.specialist-list li {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 22px;
+  align-items: flex-start;
+}
+
+.specialist-list li > i {
+  color: var(--title-bright);
+  font-size: 22px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.specialist-list li strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--title-dark);
+  margin-bottom: 4px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.specialist-list li p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 968px) {
+  .specialists-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .specialists-title {
+    font-size: 42px;
+  }
+  .callout-top {
+    right: -20px;
+  }
+  .callout-bottom {
+    left: -20px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Bigger top padding accommodates the top-callout overhang */
+  .specialists {
+    padding: 90px 0 70px;
+  }
+  /* Bottom callout overhangs by 50% of its height (via translateY) */
+  .specialists-grid {
+    gap: 90px;
+  }
+  .specialists-title {
+    font-size: 32px;
+  }
+
+  /* Image runs taller on mobile to match the target proportion */
+  .visual-frame > img {
+    aspect-ratio: 3 / 5;
+  }
+
+  /* Callouts: full-width and OVERHANGING above/below the image edges */
+  .callout {
+    width: auto;
+  }
+  .callout-top {
+    top: -55px;
+    left: auto;
+    right: 14px;
+    width: 78%;
+  }
+  .callout-bottom {
+    bottom: 0;
+    left: 14px;
+    right: auto;
+    width: 78%;
+    transform: translateY(50%);
+  }
+
+  /* Bigger, more prominent pills */
+  .callout-pill {
+    font-size: 12px;
+    letter-spacing: 2.6px;
+    padding: 9px 26px;
+  }
+
+  /* Roomier card body + slightly deeper overlap with the larger pill */
+  .callout-body {
+    margin-top: -14px;
+    padding: 22px 18px 18px;
+    border-radius: 16px;
+  }
+  .callout-body p {
+    font-size: 14px;
+  }
+  .callout-icon {
+    font-size: 22px;
+  }
+}
+
+/* =========================================
+   PROCESS SECTION
+   ========================================= */
+.process {
+  background: #ffffff;
+  padding: 90px 0 230px;
+  text-align: center;
+}
+
+.process-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+.process-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin-bottom: 60px;
+}
+
+.process-title .title-dark,
+.process-title .title-bright {
+  display: inline;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 56px;
+  align-items: stretch;
+  position: relative;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.process-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 26px 36px;
+  box-shadow: 0 8px 28px rgba(38, 40, 42, 0.08);
+  text-align: center;
+  border: 1px solid #f1f3f5;
+  position: relative;
+  z-index: 2;
+}
+
+.process-card h3 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--title-dark);
+  margin-bottom: 22px;
+}
+
+.step-icon {
+  font-size: 38px;
+  color: var(--title-bright);
+  margin-bottom: 22px;
+  line-height: 1;
+}
+
+.process-card img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 22px;
+}
+
+.process-card h4 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.process-card p {
+  font-size: 13.5px;
+  color: #6b7280;
+  line-height: 1.55;
+  max-width: 230px;
+  margin: 0 auto;
+}
+
+/* dotted curves between cards */
+.step-curve {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.curve-left {
+  left: calc(25% - 45px);
+}
+.curve-mid {
+  left: calc(50% - 45px);
+}
+.curve-right {
+  left: calc(75% - 45px);
+}
+
+/* Mobile-only vertical curve connectors between stacked cards.
+   Hidden on desktop; shown inside the 968px breakpoint. */
+.step-curve-mobile {
+  display: none;
+}
+
+/* =========================================
+   OUR APPROACH — TESTIMONIALS
+   ========================================= */
+.approach-testimonials {
+  max-width: 1300px;
+  margin: 96px auto 0;
+  padding-top: 64px;
+  border-top: 1px solid #eceff1;
+}
+
+.testimonials-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  color: var(--title-bright);
+  text-transform: uppercase;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.testimonials-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.4px;
+  color: var(--title-dark);
+  margin-bottom: 44px;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+
+.testimonial-card {
+  background: #fff;
+  border: 1px solid #f1f3f5;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(38, 40, 42, 0.08);
+  padding: 34px 30px 30px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.testimonial-stars {
+  color: var(--title-bright);
+  font-size: 18px;
+  letter-spacing: 3px;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.testimonial-headline {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--title-dark);
+  margin: 0 0 10px;
+}
+
+.testimonial-card blockquote {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+/* Collapsed: clamp to a fixed number of lines so every card is equal height.
+   Scoped to .has-toggle (added by JS) so no-JS visitors see the full quote. */
+.testimonial-card.has-toggle blockquote {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.testimonial-card.has-toggle.is-expanded blockquote {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.testimonial-toggle {
+  align-self: flex-start;
+  margin: 0 0 20px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: var(--title-bright);
+  cursor: pointer;
+}
+
+.testimonial-toggle:hover {
+  text-decoration: underline;
+}
+
+.testimonial-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid #f1f3f5;
+  padding-top: 18px;
+}
+
+.testimonial-name {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--title-dark);
+}
+
+.testimonial-loc {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+@media (max-width: 968px) {
+  .approach-testimonials {
+    margin-top: 70px;
+    padding-top: 50px;
+  }
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  .testimonials-title {
+    font-size: 24px;
+  }
+}
+
+/* Standalone testimonials band (status pages: thank-you, form-error) */
+.testimonials-band {
+  background: #ffffff;
+  padding: 96px 0;
+  text-align: center;
+}
+
+.testimonials-band .testimonials-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 968px) {
+  .testimonials-band {
+    padding: 64px 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .testimonials-band .testimonials-inner {
+    padding: 0 20px;
+  }
+}
+
+/* =========================================
+   FOOTER + OVERLAPPING CTA
+   ========================================= */
+.footer-cta-section {
+  background: linear-gradient(
+    180deg,
+    #26282a 0%,
+    #313539 50%,
+    #2f3337 100%
+  );
+  color: #fff;
+  padding-bottom: 0;
+  position: relative;
+  display: flow-root;
+}
+
+.cta-cards-row {
+  margin-top: -60px;
+  margin-bottom: 0px;
+  display: block;
+  position: relative;
+  z-index: 5;
+}
+
+.cta-teal {
+  background: linear-gradient(
+    135deg,
+    #357010 0%,
+    #448f14 50%,
+    #57ab1a 100%
+  );
+  color: #fff;
+  padding: 48px 56px;
+  border-radius: 14px;
+  border: 2px solid var(--green);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Vertical divider line between teal CTA and the floating form */
+.cta-teal::after {
+  content: "";
+  position: absolute;
+  right: 500px;
+  top: 36px;
+  bottom: 36px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+}
+
+/* keep teal text from running under the floating form */
+.cta-title {
+  max-width: 600px;
+}
+
+.cta-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  font-style: italic;
+}
+
+.cta-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  letter-spacing: -0.3px;
+}
+
+.cta-text {
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin-bottom: 26px;
+  max-width: 460px;
+  opacity: 0.95;
+}
+
+/* override quote-card for the footer context — float on right */
+.cta-form-card {
+  position: absolute;
+  right: 40px;
+  top: -100px;
+  transform: none;
+  width: 440px;
+  margin-top: 0;
+  margin-left: 0;
+  max-width: none;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/* ---------- FOOTER INFO ---------- */
+.footer-info {
+  padding: 50px 0 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.footer-logo {
+  /* inherits .logo styles already */}
+
+.footer-logo img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+
+.footer-cols {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-col-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #f6a03e 0%, #f0902a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer-col p {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #fff;
+  margin: 0;
+}
+
+.footer-col-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.footer-col-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.footer-phone-num {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--green);
+  text-decoration: none;
+  line-height: 1;
+}
+
+/* ---------- BOTTOM STRIP ---------- */
+.footer-bottom {
+  background: linear-gradient(90deg, #2a2c2e 0%, #3d7d16 100%);
+  padding: 14px 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 968px) {
+  .process {
+    padding: 70px 0 170px;
+  }
+  .process-title {
+    font-size: 32px;
+  }
+  .process-steps {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+    gap: 8px;
+  }
+  .step-curve {
+    display: none;
+  }
+  /* Show vertical dotted curves between stacked cards */
+  .step-curve-mobile {
+    display: block;
+    width: 44px;
+    height: 56px;
+    margin: 0 auto;
+  }
+
+  .cta-cards-row {
+    margin-top: -130px;
+  }
+  .cta-form-card {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .cta-teal::after {
+    display: none;
+  }
+  .cta-title {
+    font-size: 30px;
+    max-width: none;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  .footer-cols {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 560px) {
+  .process {
+    padding: 50px 0 210px;
+  }
+  .process-title {
+    font-size: 26px;
+  }
+  .cta-title {
+    font-size: 24px;
+  }
+  .cta-teal {
+    padding: 28px 28px 32px;
+  }
+
+  /* Hide the phone CTA inside the teal panel on mobile —
+     the same number lives in the footer-info below. */
+  .cta-teal .phone-cta {
+    display: none;
+  }
+
+  /* Form card overlaps UP into the teal panel so they read as one block.
+     position: relative lets z-index sit it above the teal, and we clear
+     the desktop's top/right offsets that would otherwise shift it. */
+  .cta-form-card {
+    position: relative;
+    top: auto;
+    right: auto;
+    z-index: 5;
+    margin-top: -40px;
+  }
+
+  /* Footer info: everything centered with icon ABOVE text */
+  .footer-info {
+    padding: 44px 0 32px;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-cols {
+    flex-direction: column;
+    gap: 26px;
+    align-items: center;
+  }
+  .footer-col {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
+
+
+/* =========================================
+   PERFORMANCE OPTIMIZATIONS
+   Keeps layout same, improves mobile rendering and below-fold paint.
+   ========================================= */
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Use the modern small viewport unit where supported to avoid mobile
+   browser address-bar re-layout jank. */
+@supports (min-height: 100svh) {
+  .hero {
+    min-height: 100svh;
+  }
+}
+
+/* Prevent below-the-fold sections from painting before the user reaches them. */
+.problem,
+.specialists,
+.process {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
+/* backdrop-filter is expensive on fixed headers, especially on mobile.
+   This keeps the same solid header feel without GPU-heavy blur. */
+.top-bar.scrolled {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Hover effects are unnecessary on touch devices and can cause extra paints. */
+@media (hover: none) {
+  .phone-cta:hover,
+  .problem-cta:hover,
+  .submit-btn:hover,
+  .feature-card:hover {
+    transform: none;
+  }
+
+  .problem-img-card:hover img {
+    transform: none;
+  }
+
+  .phone-cta:hover::before,
+  .problem-cta:hover::before,
+  .submit-btn:hover::before {
+    left: -75%;
+  }
+}
+
+/* =========================================
+   GOOGLE reCAPTCHA WRAPPER
+   Centers the widget inside the quote form
+   and fluidly scales the fixed 304px widget
+   so it fits every mobile width without
+   pushing the form past the viewport edge.
+   ========================================= */
+.recaptcha-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0 2px;
+  width: 100%;
+  overflow: hidden; /* clip any sub-pixel overflow from the iframe */
+}
+
+.recaptcha-wrap .g-recaptcha {
+  transform-origin: center top;
+}
+
+/* Step the scale down as the viewport narrows. No gaps between
+   breakpoints, so the form stays centered on every phone size. */
+@media (max-width: 440px) {
+  .recaptcha-wrap .g-recaptcha { transform: scale(0.95); }
+}
+@media (max-width: 410px) {
+  .recaptcha-wrap .g-recaptcha { transform: scale(0.90); }
+}
+@media (max-width: 390px) {
+  .recaptcha-wrap .g-recaptcha { transform: scale(0.85); }
+}
+@media (max-width: 370px) {
+  .recaptcha-wrap .g-recaptcha { transform: scale(0.80); }
+}
+@media (max-width: 350px) {
+  .recaptcha-wrap .g-recaptcha { transform: scale(0.75); }
+}
+@media (max-width: 330px) {
+  .recaptcha-wrap .g-recaptcha { transform: scale(0.70); }
+}
+
+/* Defensive: form fields and the submit button must never exceed
+   the card width on any device. */
+.quote-form input,
+.quote-form textarea,
+.submit-btn {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   MOBILE: Center the teal CTA panel
+   On mobile the floating form drops below the teal panel and the
+   inner phone CTA is hidden, so the remaining text reads better
+   centered than left-aligned.
+   ========================================= */
+@media (max-width: 968px) {
+  .cta-teal {
+    text-align: center;
+  }
+  .cta-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* =========================================
+   MOBILE: Larger body copy for readability
+   Bump up the smaller font sizes across the page so the page is
+   comfortable to read on a phone.
+   ========================================= */
+@media (max-width: 560px) {
+  /* Hero */
+  .pill { font-size: 11.5px; }
+  .hero-sub { font-size: 16px; line-height: 1.6; }
+
+  /* Quote form */
+  .quote-form input,
+  .quote-form textarea { font-size: 15px; }
+  .quote-form input::placeholder,
+  .quote-form textarea::placeholder { font-size: 14.5px; }
+  .consent { font-size: 11.5px; }
+  .terms { font-size: 11px; }
+
+  /* Trust strip (4 features under hero) */
+  .feature-text strong { font-size: 17px; }
+  .feature-text span { font-size: 16px; }
+
+  /* Problem / Solution */
+  .section-eyebrow { font-size: 14.5px; }
+  .solution-text { font-size: 16px; line-height: 1.65; }
+  .feature-card p { font-size: 16px; line-height: 1.55; }
+
+  /* Specialists */
+  .specialists-eyebrow { font-size: 14.5px; }
+  .specialist-list li strong { font-size: 19px; }
+  .specialist-list li p { font-size: 15px; line-height: 1.5; }
+  .callout-body p { font-size: 15px; }
+
+  /* Process */
+  .process-eyebrow { font-size: 14.5px; }
+  .process-card h4 { font-size: 17px; }
+  .process-card p { font-size: 15px; line-height: 1.6; }
+
+  /* Footer teal CTA */
+  .cta-eyebrow { font-size: 13px; }
+  .cta-text { font-size: 16px; line-height: 1.6; }
+
+  /* Footer */
+  .footer-col p { font-size: 15px; line-height: 1.5; }
+  .footer-col-label { font-size: 12.5px; }
+  .footer-phone-num { font-size: 24px; }
+  .footer-bottom { font-size: 13px; }
+}
+
+/* =========================================
+   MOBILE: Trust strip → 2x2 trust-badge grid
+   The 4-row stacked layout wastes vertical space and reads as a
+   plain list. A 2x2 grid with icon-above-text turns it into a
+   proper trust-badge block.
+   ========================================= */
+@media (max-width: 560px) {
+  .features-strip {
+    padding: 28px 0;
+  }
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 14px;
+    row-gap: 24px;
+  }
+  .feature {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .feature img {
+    width: 50px;
+    height: 50px;
+  }
+  .feature-text {
+    align-items: center;
+  }
+  /* In the 2x2 grid, slightly smaller text reads as a refined
+     trust-badge layout (overrides the page-wide mobile bump). */
+  .feature-text strong {
+    font-size: 15.5px;
+  }
+  .feature-text span {
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   MOBILE: Larger Process section text
+   Bumps eyebrow, section title, step number, step heading and
+   description so each step card reads with more weight on a phone.
+   ========================================= */
+@media (max-width: 560px) {
+  .process-eyebrow {
+    font-size: 15.5px;
+    letter-spacing: 2.6px;
+  }
+  .process-title {
+    font-size: 30px;
+  }
+  .process-card h3 {
+    font-size: 25px;
+    margin-bottom: 18px;
+  }
+  .process-card h4 {
+    font-size: 19px;
+    margin-bottom: 12px;
+  }
+  .process-card p {
+    font-size: 16.5px;
+    line-height: 1.65;
+    max-width: 320px;
+  }
+}
+
+/* =========================================
+   CD REMODELS — BRAND MICRO-ANIMATIONS
+   Subtle, layout-safe, and disabled for users
+   who prefer reduced motion.
+   ========================================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* Primary phone CTA: gentle green "attention" glow */
+  @keyframes cdGlow {
+    0%,
+    100% {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 12px 28px var(--green-glow);
+    }
+    50% {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 16px 42px rgba(87, 184, 26, 0.6);
+    }
+  }
+  .phone-cta {
+    animation: cdGlow 2.8s ease-in-out infinite;
+  }
+
+  /* Logo: subtle lift on hover */
+  .logo img {
+    transition: transform 0.3s ease;
+  }
+  .logo:hover img {
+    transform: scale(1.04);
+  }
+
+  /* Promo badge: soft pulse to draw the eye */
+  @keyframes cdBadge {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.045);
+    }
+  }
+  .top-badge {
+    animation: cdBadge 2.4s ease-in-out infinite;
+  }
+
+  /* Green CTA panel: slow diagonal sheen drift */
+  .cta-teal {
+    background-size: 180% 180%;
+    animation: cdSheen 9s ease infinite;
+  }
+  @keyframes cdSheen {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
