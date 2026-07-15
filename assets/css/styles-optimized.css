@@ -89,6 +89,24 @@ body {
   background-position: center;
   z-index: 0;
 }
+
+/* PORTRAIT HERO ART
+   .hero wraps the headline AND the quote form + trust badges, so on a phone the
+   hero box is ~1450px tall against an ~844px viewport. Because .hero-bg is
+   inset:0, background-size:cover resolves against that ~0.26 ratio box: it
+   crops ~66% of the photo's width and upscales it ~4x. Pinning the paint box to
+   the visible viewport restores the framing the portrait mobile art was cut for.
+   Gated on aspect-ratio, not width, because cover reacts to ratio.
+   KEEP IN SYNC: cabinets.html and bathroom-remodeling.html re-declare .hero-bg. */
+@media (max-aspect-ratio: 1/1) and (max-width: 1100px) {
+  .hero-bg {
+    height: 100vh; /* fallback for browsers without svh */
+    height: 100svh;
+    bottom: auto;
+    background-image: url("../img/hero-kitchen-mobile.webp");
+  }
+}
+
 /* Lighter overlay so the palm-tree scene shows through */
 .hero-overlay {
   position: absolute;
@@ -680,11 +698,6 @@ body {
 @media (max-width: 560px) {
   .container {
     padding: 0 20px;
-  }
-
-  /* Swap hero background to mobile-optimized version */
-  .hero-bg {
-    background-image: url("../img/hero-kitchen-mobile.webp");
   }
 
   /* Hero title: bumped up + show 5-line mobile version

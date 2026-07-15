@@ -35,7 +35,9 @@
       .hero-bg {
         background-image: url("assets/img/hero-bathroom-desktop.webp");
       }
-      @media (max-width: 560px) {
+      /* Must mirror the portrait query in styles-optimized.css — this inline
+         block re-declares .hero-bg at equal specificity and wins on order. */
+      @media (max-aspect-ratio: 1/1) and (max-width: 1100px) {
         .hero-bg {
           background-image: url("assets/img/hero-bathroom-mobile.webp");
         }
